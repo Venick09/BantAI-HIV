@@ -1,0 +1,96 @@
+version: v1.0
+name: Vireo App CI/CD Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+
+blocks:
+  - name: Install Dependencies
+    task:
+      jobs:
+        - name: npm install
+          commands:
+            - checkout
+            - nvm use
+            - node --version
+            - npm --version
+            - cache restore
+            - npm ci --prefer-offline
+            - cache store
+
+  - name: Code Quality
+    dependencies: ["Install Dependencies"]
+    task:
+      jobs:
+        - name: Lint
+          commands:
+            - checkout
+            - cache restore
+            - npm run lint
+
+        - name: Type Check
+          commands:
+            - checkout
+            - cache restore
+            - npm run types
+
+        - name: Format Check
+          commands:
+            - checkout
+            - cache restore
+            - npm run format:check
+
+  - name: Tests
+    dependencies: ["Install Dependencies"]
+    task:
+      secrets:
+        - name: test-env
+      jobs:
+        - name: Unit Tests
+          commands:
+            - checkout
+            - cache restore
+            - npm run test:unit
+
+        - name: E2E Tests
+          commands:
+            - checkout
+            - cache restore
+            - npm run test:e2e
+
+  - name: Build
+    dependencies: ["Code Quality", "Tests"]
+    task:
+      secrets:
+        - name: build-env
+      jobs:
+        - name: Build Application
+          commands:
+            - checkout
+            - cache restore
+            - npm run build
+            - artifact push workflow dist
+
+  - name: Database Migrations
+    dependencies: ["Build"]
+    task:
+      secrets:
+        - name: database-env
+      jobs:
+        - name: Run Migrations
+          commands:
+            - checkout
+            - cache restore
+            - npx drizzle-kit migrate
+
+promotions:
+  - name: Deploy to Production
+    pipeline_file: deploy-production.yml
+    auto_promote:
+      when: "result = 'passed' and branch = 'main'"
+
+  - name: Deploy to Staging
+    pipeline_file: deploy-staging.yml
+    auto_promote:
+      when: "result = 'passed' and branch = 'develop'"

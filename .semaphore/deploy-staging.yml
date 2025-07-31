@@ -1,0 +1,39 @@
+version: v1.0
+name: Deploy to Staging
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+
+blocks:
+  - name: Deploy to Vercel Staging
+    task:
+      secrets:
+        - name: vercel-staging
+        - name: staging-env
+      jobs:
+        - name: Staging Deployment
+          commands:
+            - checkout
+            - nvm use
+            - npm install -g vercel
+            - vercel pull --yes --environment=preview --token=$VERCEL_TOKEN
+            - vercel build --token=$VERCEL_TOKEN
+            - vercel deploy --prebuilt --token=$VERCEL_TOKEN
+
+  - name: Staging Tests
+    dependencies: ["Deploy to Vercel Staging"]
+    task:
+      secrets:
+        - name: staging-env
+      jobs:
+        - name: Integration Tests
+          commands:
+            - checkout
+            - cache restore
+            - npm run test:integration
+
+        - name: Preview URL
+          commands:
+            - echo "Staging deployment completed!"
+            - echo "Preview URL: $VERCEL_URL"

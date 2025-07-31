@@ -1,0 +1,39 @@
+version: v1.0
+name: Deploy to Production
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+
+blocks:
+  - name: Deploy to Vercel
+    task:
+      secrets:
+        - name: vercel-production
+        - name: production-env
+      jobs:
+        - name: Production Deployment
+          commands:
+            - checkout
+            - nvm use
+            - npm install -g vercel
+            - vercel pull --yes --environment=production --token=$VERCEL_TOKEN
+            - vercel build --prod --token=$VERCEL_TOKEN
+            - vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
+
+  - name: Post-Deployment
+    dependencies: ["Deploy to Vercel"]
+    task:
+      secrets:
+        - name: production-env
+      jobs:
+        - name: Smoke Tests
+          commands:
+            - checkout
+            - cache restore
+            - npm run test:smoke
+
+        - name: Notify Team
+          commands:
+            - echo "Deployment to production completed successfully!"
+            # Add Slack/Discord/Email notification here
