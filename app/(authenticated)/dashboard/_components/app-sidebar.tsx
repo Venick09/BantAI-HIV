@@ -1,6 +1,6 @@
 "use client"
 
-import { Link, Settings2, User, Users } from "lucide-react"
+import { Settings2, User, Users, Heart, Activity, Home } from "lucide-react"
 import * as React from "react"
 
 import {
@@ -51,28 +51,66 @@ export function AppSidebar({
     ],
     navMain: [
       {
-        title: "Nav Item 1",
+        title: "Home",
+        url: "/dashboard",
+        icon: Home,
+        isActive: true,
+        items: []
+      },
+      {
+        title: "Health Services",
         url: "#",
-        icon: Link,
+        icon: Heart,
         items: [
           {
-            title: "Sub Item 1",
-            url: "/dashboard/nav-item-1"
+            title: "Risk Assessment",
+            url: "/dashboard/risk-assessment"
           },
           {
-            title: "Sub Item 2",
-            url: "/dashboard/nav-item-2"
+            title: "My Results",
+            url: "/dashboard/results"
+          },
+          {
+            title: "Test Centers",
+            url: "/dashboard/test-centers"
           }
         ]
       },
       {
-        title: "Nav Item 2",
+        title: "Treatment",
         url: "#",
-        icon: Link,
+        icon: Activity,
         items: [
           {
-            title: "Sub Item 1",
-            url: "/dashboard/nav-item-1"
+            title: "ART Management",
+            url: "/dashboard/art"
+          },
+          {
+            title: "Appointments",
+            url: "/dashboard/appointments"
+          },
+          {
+            title: "Reminders",
+            url: "/dashboard/reminders"
+          }
+        ]
+      },
+      {
+        title: "Account",
+        url: "#",
+        icon: User,
+        items: [
+          {
+            title: "Profile",
+            url: "/dashboard/account"
+          },
+          {
+            title: "Billing",
+            url: "/dashboard/billing"
+          },
+          {
+            title: "Support",
+            url: "/dashboard/support"
           }
         ]
       },
@@ -84,6 +122,14 @@ export function AppSidebar({
           {
             title: "General",
             url: "/dashboard/settings"
+          },
+          {
+            title: "Privacy",
+            url: "/dashboard/privacy"
+          },
+          {
+            title: "Consent Management",
+            url: "/dashboard/consent"
           }
         ]
       }

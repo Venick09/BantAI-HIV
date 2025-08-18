@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { AnimatePresence, motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Heart, Phone } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -18,24 +18,20 @@ export function StickyCTA() {
             animate={{ y: 0 }}
             exit={{ y: 100 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="border-border bg-background/80 fixed right-0 bottom-0 left-0 z-50 border-t p-4 backdrop-blur-lg md:hidden"
+            className="fixed right-0 bottom-0 left-0 z-50 border-t border-gray-200 bg-white/95 p-4 backdrop-blur-lg md:hidden"
           >
             <div className="flex items-center justify-between gap-3">
               <div className="flex-1">
-                <p className="text-muted-foreground text-xs font-medium">
-                  Love this template?
+                <p className="text-xs font-medium text-gray-600">
+                  Get confidential HIV support
                 </p>
-                <p className="text-foreground text-sm font-semibold">
-                  Star us on GitHub!
+                <p className="text-sm font-semibold text-gray-900">
+                  Start your free assessment now
                 </p>
               </div>
-              <Button size="sm" asChild className="group">
-                <Link
-                  href="https://github.com/vireo/vireo-app-template"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Start Building
+              <Button size="sm" asChild className="group bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600">
+                <Link href="/register">
+                  Get Started
                   <ArrowRight className="ml-1 h-3 w-3 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
@@ -43,7 +39,7 @@ export function StickyCTA() {
               <button
                 aria-label="Dismiss"
                 onClick={() => setDismissed(true)}
-                className="hover:bg-accent ml-2 rounded-full p-1"
+                className="ml-2 rounded-full p-1 hover:bg-gray-100"
               >
                 <svg width="16" height="16" fill="none" viewBox="0 0 16 16">
                   <path
@@ -64,12 +60,12 @@ export function StickyCTA() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="border-border bg-card fixed right-6 bottom-6 z-50 hidden max-w-sm min-w-[300px] rounded-lg border p-6 shadow-xl md:block"
+            className="fixed right-6 bottom-6 z-50 hidden max-w-sm min-w-[350px] rounded-2xl border border-gray-200 bg-white p-6 shadow-2xl md:block"
           >
             <button
               aria-label="Dismiss"
               onClick={() => setDismissed(true)}
-              className="hover:bg-accent absolute top-3 right-3 rounded-full p-1"
+              className="absolute top-3 right-3 rounded-full p-1 hover:bg-gray-100"
             >
               <svg width="18" height="18" fill="none" viewBox="0 0 18 18">
                 <path
@@ -82,27 +78,32 @@ export function StickyCTA() {
               </svg>
             </button>
             <div className="space-y-4">
-              <div>
-                <p className="text-muted-foreground text-sm font-medium">
-                  Love this template?
-                </p>
-                <p className="text-foreground text-lg font-bold">
-                  Star us on GitHub!
-                </p>
+              <div className="flex items-start gap-3">
+                <div className="bg-gradient-to-br from-red-500 to-pink-500 rounded-lg p-2">
+                  <Heart className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-600">
+                    Need HIV support?
+                  </p>
+                  <p className="text-lg font-bold text-gray-900">
+                    Free & Confidential Help
+                  </p>
+                </div>
               </div>
-              <Button asChild className="group w-full">
-                <Link
-                  href="https://github.com/vireo/vireo-app-template"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Start Building
+              <p className="text-sm text-gray-600">
+                Take a 5-minute risk assessment to understand your HIV status and get connected to care.
+              </p>
+              <Button asChild className="group w-full bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600">
+                <Link href="/register">
+                  Start Assessment
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
-              <p className="text-muted-foreground text-center text-xs">
-                The #1 Full Stack App Template
-              </p>
+              <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
+                <Phone className="h-3 w-3" />
+                <span>Or call 1-800-HIV-HELP</span>
+              </div>
             </div>
           </motion.div>
         </>

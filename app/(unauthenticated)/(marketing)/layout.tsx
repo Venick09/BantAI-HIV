@@ -1,4 +1,3 @@
-import { Footer } from "./_components/footer"
 import { HeaderWrapper } from "./_components/header-wrapper"
 import { ScrollIndicator } from "./_components/scroll-indicator"
 import { SiteBanner } from "./_components/site-banner"
@@ -14,7 +13,6 @@ export default async function MarketingLayout({
       <SiteBanner />
       <HeaderWrapper />
       {children}
-      <Footer />
       <StickyCTA />
       <ScrollIndicator />
     </>

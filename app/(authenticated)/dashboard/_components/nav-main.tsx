@@ -70,7 +70,15 @@ export function NavMain({
       <SidebarMenu>
         {items.map(item => (
           <SidebarMenuItem key={item.title}>
-            {isCollapsed && item.items && item.items.length > 0 ? (
+            {!item.items || item.items.length === 0 ? (
+              // Direct link for items without sub-items
+              <SidebarMenuButton asChild tooltip={item.title}>
+                <Link href={item.url}>
+                  {item.icon && <item.icon />}
+                  <span>{item.title}</span>
+                </Link>
+              </SidebarMenuButton>
+            ) : isCollapsed ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuButton

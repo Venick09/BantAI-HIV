@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Vireo App Template",
-  description: "The easiest way to start your next project."
+  title: "BantAI - HIV Prevention & Care",
+  description: "Accessible HIV testing, treatment, and support through SMS. Take control of your health journey."
 }
 
 export default function RootLayout({

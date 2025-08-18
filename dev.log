@@ -1,0 +1,568 @@
+
+> vireo-app-template@2.0.0 dev
+> next dev --turbopack
+
+   ▲ Next.js 15.3.3 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.8:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Compiled middleware in 140ms
+ ✓ Ready in 730ms
+ ○ Compiling /register ...
+ ✓ Compiled /register in 1678ms
+ GET /register 200 in 1942ms
+ ✓ Compiled /favicon.ico in 160ms
+ GET /favicon.ico?favicon.5d0afc85.ico 200 in 402ms
+
+📱 sendRegistrationOTP called for: 09999986806
+✅ SMS: Using Semaphore provider
+✅ SMS Service initialized
+✅ OTP: Using database storage
+
+============================================================
+🔑 OTP GENERATED (Database Storage)
+============================================================
+Phone Number: 09999986806
+Purpose: registration
+OTP Code: 681539
+Expires: 8/17/2025, 2:32:06 PM
+============================================================
+
+✅ OTP generated: 681539
+📤 Sending SMS...
+📱 Semaphore: Sending OTP to 09999986806
+🔑 API Key: 345d7d7c...
+🔗 Endpoint: https://api.semaphore.co/api/v4/otp
+🔐 Using OTP code: 681539
+✅ Semaphore: OTP sent successfully! Message ID: 253312004, Status: Pending
+🔐 Generated OTP Code: 681539
+📤 SMS result: {
+  success: true,
+  messageId: '253312004',
+  sentAt: 2025-08-17T06:22:07.318Z,
+  providerResponse: [
+    {
+      message_id: 253312004,
+      user_id: 60557,
+      user: 'leannemarasigan21@gmail.com',
+      account_id: 60418,
+      account: 'Vireo',
+      recipient: '639999986806',
+      message: 'Welcome to BantAI!\n' +
+        '\n' +
+        'Your verification code is: 681539\n' +
+        '\n' +
+        'This code expires in 10 minutes.',
+      code: '681539',
+      sender_name: 'Semaphore',
+      network: 'Smart',
+      status: 'Pending',
+      type: 'Otp',
+      source: 'Api',
+      created_at: '2025-08-17 14:22:07',
+      updated_at: '2025-08-17 14:22:07'
+    }
+  ],
+  metadata: { otpCode: '681539' }
+}
+ POST /register 200 in 458ms
+
+📱 sendRegistrationOTP called for: 09999986806
+✅ SMS: Using Semaphore provider
+✅ SMS Service initialized
+
+============================================================
+🔑 OTP GENERATED (Database Storage)
+============================================================
+Phone Number: 09999986806
+Purpose: registration
+OTP Code: 503148
+Expires: 8/17/2025, 2:34:57 PM
+============================================================
+
+✅ OTP generated: 503148
+📤 Sending SMS...
+📱 Semaphore: Sending OTP to 09999986806
+🔑 API Key: 345d7d7c...
+🔗 Endpoint: https://api.semaphore.co/api/v4/otp
+🔐 Using OTP code: 503148
+✅ Semaphore: OTP sent successfully! Message ID: 253312102, Status: Pending
+🔐 Generated OTP Code: 503148
+📤 SMS result: {
+  success: true,
+  messageId: '253312102',
+  sentAt: 2025-08-17T06:24:57.446Z,
+  providerResponse: [
+    {
+      message_id: 253312102,
+      user_id: 60557,
+      user: 'leannemarasigan21@gmail.com',
+      account_id: 60418,
+      account: 'Vireo',
+      recipient: '639999986806',
+      message: 'Welcome to BantAI!\n' +
+        '\n' +
+        'Your verification code is: 503148\n' +
+        '\n' +
+        'This code expires in 10 minutes.',
+      code: '503148',
+      sender_name: 'Semaphore',
+      network: 'Smart',
+      status: 'Pending',
+      type: 'Otp',
+      source: 'Api',
+      created_at: '2025-08-17 14:24:57',
+      updated_at: '2025-08-17 14:24:57'
+    }
+  ],
+  metadata: { otpCode: '503148' }
+}
+ POST /register 200 in 300ms
+ ○ Compiling /login/[[...login]] ...
+ ✓ Compiled /login/[[...login]] in 598ms
+ GET /login 200 in 853ms
+ GET /login/SignIn_clerk_catchall_check_1755411946000 200 in 72ms
+ ✓ Compiled middleware in 2ms
+ ✓ Compiled in 66ms
+ ✓ Compiled middleware in 1ms
+ ✓ Compiled in 65ms
+ ✓ Compiled /admin-landing in 454ms
+ GET /admin-landing 200 in 517ms
+ GET /login?redirect=%2Fadmin 200 in 38ms
+ GET /login/SignIn_clerk_catchall_check_1755412034699 200 in 86ms
+ ○ Compiling /admin ...
+ ✓ Compiled /admin in 506ms
+ GET /admin 200 in 606ms
+ ✓ Compiled /admin/users in 484ms
+ GET /admin/users 200 in 501ms
+ ✓ Compiled /api/admin/users in 302ms
+Admin users API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/users 500 in 386ms
+Admin users API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/users 500 in 19ms
+ ✓ Compiled /admin/test-results in 490ms
+ GET /admin/test-results 200 in 505ms
+ ✓ Compiled /api/admin/test-results in 244ms
+ GET /api/admin/test-results 200 in 266ms
+ GET /api/admin/test-results 200 in 15ms
+ ✓ Compiled /_not-found/page in 426ms
+ GET /admin/assessments 404 in 436ms
+ GET /admin/assessments 404 in 28ms
+ GET /admin/assessments 404 in 38ms
+ GET /favicon.ico?favicon.5d0afc85.ico 200 in 217ms
+ GET /admin/assessments 404 in 50ms
+ GET /favicon.ico?favicon.5d0afc85.ico 200 in 216ms
+ ✓ Compiled middleware in 1ms
+ ✓ Compiled in 96ms
+ ○ Compiling /admin/assessments ...
+ ✓ Compiled /admin/assessments in 574ms
+ GET /admin/assessments 200 in 722ms
+ GET /admin/assessments 200 in 22ms
+ GET /api/admin/assessments 404 in 110ms
+ GET /api/admin/assessments 404 in 39ms
+ GET /favicon.ico?favicon.5d0afc85.ico 200 in 324ms
+ ✓ Compiled middleware in 0ms
+ GET /admin/assessments 200 in 130ms
+ GET /admin/assessments 200 in 24ms
+ GET /favicon.ico?favicon.5d0afc85.ico 200 in 242ms
+ ✓ Compiled /admin/analytics in 493ms
+ GET /admin/analytics 200 in 538ms
+ GET /admin/analytics 200 in 39ms
+ ○ Compiling /admin/appointments ...
+ ✓ Compiled /admin/appointments in 525ms
+ GET /admin/appointments 200 in 556ms
+ GET /admin/settings 404 in 29ms
+ GET /admin/settings 404 in 105ms
+ GET /admin/appointments 200 in 97ms
+ ○ Compiling /admin/billing ...
+ ✓ Compiled /admin/billing in 708ms
+ GET /admin/billing 200 in 749ms
+ GET /admin/billing 200 in 33ms
+ GET /admin/users 200 in 42ms
+Admin users API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/users 500 in 110ms
+Admin users API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/users 500 in 39ms
+ GET /admin/test-results 200 in 43ms
+ GET /api/admin/test-results 200 in 39ms
+ GET /api/admin/test-results 200 in 18ms
+ GET /admin/assessments 200 in 33ms
+ ✓ Compiled /api/admin/assessments in 232ms
+Admin assessments API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/assessments 500 in 265ms
+Admin assessments API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/assessments 500 in 19ms
+ GET /admin 200 in 51ms
+ GET /admin/users 200 in 74ms
+Admin users API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/users 500 in 26ms
+ GET /admin-landing 200 in 82ms
+ GET /login?redirect=%2Fadmin 200 in 104ms
+ GET /login/SignIn_clerk_catchall_check_1755412802005 200 in 157ms
+ GET /admin 200 in 171ms
+ GET /admin/test-results 200 in 82ms
+ GET /api/admin/test-results 200 in 25ms
+ GET /admin/test-results 200 in 36ms
+ GET /admin/test-results 200 in 22ms
+ GET /admin/test-results 200 in 32ms
+ GET /admin/test-results 200 in 29ms
+ GET /admin/users 200 in 36ms
+Admin users API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/users 500 in 28ms
+Admin users API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/users 500 in 21ms
+ GET /admin/test-results 200 in 26ms
+ GET /api/admin/test-results 200 in 22ms
+ GET /api/admin/test-results 200 in 20ms
+ GET /admin/assessments 200 in 35ms
+Admin assessments API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/assessments 500 in 25ms
+Admin assessments API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/assessments 500 in 21ms
+ GET /admin/users 200 in 36ms
+Admin users API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/users 500 in 24ms
+Admin users API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/users 500 in 20ms
+ GET /admin 200 in 46ms
+ GET /admin/analytics 200 in 75ms
+ GET /admin 200 in 38ms
+ GET /admin/users 200 in 23ms
+Admin users API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/users 500 in 23ms
+Admin users API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/users 500 in 19ms
+ GET /admin/test-results 200 in 37ms
+ GET /api/admin/test-results 200 in 33ms
+ GET /api/admin/test-results 200 in 19ms
+ GET /admin/users 200 in 35ms
+Admin users API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/users 500 in 35ms
+Admin users API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/users 500 in 23ms
+ GET /admin/billing 200 in 38ms
+ GET /admin 200 in 36ms
+ ✓ Compiled /admin in 44ms
+ GET /admin 200 in 219ms
+ GET /admin 200 in 61ms
+ GET /admin 200 in 47ms
+ GET /admin 200 in 38ms
+ GET /admin 200 in 37ms
+ GET /admin 200 in 37ms
+ GET /admin 200 in 36ms
+ GET /admin 200 in 31ms
+ ✓ Compiled /admin/users in 14ms
+ GET /admin/users 200 in 227ms
+Admin users API error: TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at Array.reduce (<anonymous>)
+ GET /api/admin/users 500 in 123ms
+ GET /admin-landing 200 in 56ms
+ GET /admin/users 200 in 85ms
+ ✓ Compiled middleware in 1ms
+ GET /admin/users 200 in 142ms
+ GET /admin/users 200 in 42ms
+ ✓ Compiled /api/admin/test in 228ms
+Test API: Starting...
+Test API: Admin check result: false
+ GET /api/admin/test 401 in 277ms
+ GET /admin/users 200 in 136ms
+ GET /api/admin/users 200 in 109ms
+ GET /favicon.ico?favicon.5d0afc85.ico 200 in 237ms
+ ✓ Compiled middleware in 1ms
+ ✓ Compiled in 96ms
+ GET /admin/users 200 in 135ms
+ GET /admin/users 200 in 49ms
+ GET /favicon.ico?favicon.5d0afc85.ico 200 in 237ms
+ ✓ Compiled middleware in 1ms
+ GET /admin/users 200 in 137ms
+ GET /admin/users 200 in 46ms
+ GET /favicon.ico?favicon.5d0afc85.ico 200 in 237ms
+ GET /admin/users 200 in 184ms
+ GET /api/admin/users 200 in 110ms
+ GET /favicon.ico?favicon.5d0afc85.ico 200 in 223ms
+ GET /admin 200 in 116ms
+ ○ Compiling / ...
+ ✓ Compiled / in 824ms
+ GET / 200 in 1128ms
+ POST / 200 in 68ms
+ GET / 200 in 62ms
+ GET / 200 in 44ms
+ ✓ Compiled /register in 18ms
+ GET /register 200 in 138ms
+
+📱 sendRegistrationOTP called for: 09999986806
+✅ SMS: Using Semaphore provider
+✅ SMS Service initialized
+✅ OTP: Using database storage
+
+============================================================
+🔑 OTP GENERATED (Database Storage)
+============================================================
+Phone Number: 09999986806
+Purpose: registration
+OTP Code: 067443
+Expires: 8/17/2025, 3:02:40 PM
+============================================================
+
+✅ OTP generated: 067443
+📤 Sending SMS...
+📱 Semaphore: Sending OTP to 09999986806
+🔑 API Key: 345d7d7c...
+🔗 Endpoint: https://api.semaphore.co/api/v4/otp
+🔐 Using OTP code: 067443
+✅ Semaphore: OTP sent successfully! Message ID: 253312965, Status: Pending
+🔐 Generated OTP Code: 067443
+📤 SMS result: {
+  success: true,
+  messageId: '253312965',
+  sentAt: 2025-08-17T06:52:40.956Z,
+  providerResponse: [
+    {
+      message_id: 253312965,
+      user_id: 60557,
+      user: 'leannemarasigan21@gmail.com',
+      account_id: 60418,
+      account: 'Vireo',
+      recipient: '639999986806',
+      message: 'Welcome to BantAI!\n' +
+        '\n' +
+        'Your verification code is: 067443\n' +
+        '\n' +
+        'This code expires in 10 minutes.',
+      code: '067443',
+      sender_name: 'Semaphore',
+      network: 'Smart',
+      status: 'Pending',
+      type: 'Otp',
+      source: 'Api',
+      created_at: '2025-08-17 14:52:41',
+      updated_at: '2025-08-17 14:52:41'
+    }
+  ],
+  metadata: { otpCode: '067443' }
+}
+ POST /register 200 in 386ms
+ POST /register 200 in 44ms
+⚠️ Could not create Clerk user (development mode): Error: Unprocessable Entity
+    at async createUser (actions/users.ts:130:24)
+  128 |       // Try to create Clerk user
+  129 |       const clerk = await clerkClient()
+> 130 |       const clerkUser = await clerk.users.createUser({
+      |                        ^
+  131 |         phoneNumber: [data.phoneNumber],
+  132 |         firstName: data.firstName,
+  133 |         lastName: data.lastName, {
+  toString: [Function (anonymous)],
+  status: 422,
+  clerkTraceId: '7fd092e3e737eff31a424d83d9b0d5e9',
+  retryAfter: undefined,
+  clerkError: true,
+  errors: [Array]
+}
+✅ SMS: Using Semaphore provider
+📱 Semaphore: Sending SMS to 09999986806
+🔑 API Key: 345d7d7c...
+🔗 Endpoint: https://api.semaphore.co/api/v4/messages
+✅ Semaphore: SMS sent successfully! Message ID: 253312976, Status: Pending
+ POST /register 200 in 1289ms
+ GET /login 200 in 51ms
+ GET /login/SignIn_clerk_catchall_check_1755413599845 200 in 170ms
+ GET /login 200 in 31ms
+ GET /login 200 in 32ms
+ GET /login 200 in 42ms
+ GET /login 200 in 25ms
+ GET /login 200 in 26ms
+ GET /login 200 in 26ms
+ GET /login 200 in 28ms
+ GET /login 200 in 32ms
+ GET /register 200 in 45ms
+ GET /login/SignIn_clerk_catchall_check_1755413630334 200 in 108ms
+ GET /register 200 in 49ms
+ GET /login 200 in 40ms
+ GET /login/SignIn_clerk_catchall_check_1755413726333 200 in 88ms
+ ✓ Compiled middleware in 1ms
+ ✓ Compiled in 90ms
+ GET /login 200 in 94ms
+ GET /login 200 in 62ms
+ ✓ Compiled middleware in 1ms
+ ✓ Compiled in 65ms
+ GET /login 200 in 98ms
+ GET /login 200 in 27ms
+ ✓ Compiled in 142ms
+ GET /register 200 in 115ms
+
+📱 sendRegistrationOTP called for: 09999986806
+✅ SMS: Using Semaphore provider
+✅ SMS Service initialized
+✅ OTP: Using database storage
+
+============================================================
+🔑 OTP GENERATED (Database Storage)
+============================================================
+Phone Number: 09999986806
+Purpose: registration
+OTP Code: 546659
+Expires: 8/17/2025, 3:07:46 PM
+============================================================
+
+✅ OTP generated: 546659
+📤 Sending SMS...
+📱 Semaphore: Sending OTP to 09999986806
+🔑 API Key: 345d7d7c...
+🔗 Endpoint: https://api.semaphore.co/api/v4/otp
+🔐 Using OTP code: 546659
+✅ Semaphore: OTP sent successfully! Message ID: 253313086, Status: Pending
+🔐 Generated OTP Code: 546659
+📤 SMS result: {
+  success: true,
+  messageId: '253313086',
+  sentAt: 2025-08-17T06:57:46.846Z,
+  providerResponse: [
+    {
+      message_id: 253313086,
+      user_id: 60557,
+      user: 'leannemarasigan21@gmail.com',
+      account_id: 60418,
+      account: 'Vireo',
+      recipient: '639999986806',
+      message: 'Welcome to BantAI!\n' +
+        '\n' +
+        'Your verification code is: 546659\n' +
+        '\n' +
+        'This code expires in 10 minutes.',
+      code: '546659',
+      sender_name: 'Semaphore',
+      network: 'Smart',
+      status: 'Pending',
+      type: 'Otp',
+      source: 'Api',
+      created_at: '2025-08-17 14:57:46',
+      updated_at: '2025-08-17 14:57:46'
+    }
+  ],
+  metadata: { otpCode: '546659' }
+}
+ POST /register 200 in 346ms
+ POST /register 200 in 35ms
+⚠️ Could not create Clerk user (development mode): Error: Unprocessable Entity
+    at async createUser (actions/users.ts:130:24)
+  128 |       // Try to create Clerk user
+  129 |       const clerk = await clerkClient()
+> 130 |       const clerkUser = await clerk.users.createUser({
+      |                        ^
+  131 |         phoneNumber: [data.phoneNumber],
+  132 |         firstName: data.firstName,
+  133 |         lastName: data.lastName, {
+  toString: [Function (anonymous)],
+  status: 422,
+  clerkTraceId: '63ae4575e750cd9bda6209246dfcccc8',
+  retryAfter: undefined,
+  clerkError: true,
+  errors: [Array]
+}
+✅ SMS: Using Semaphore provider
+📱 Semaphore: Sending SMS to 09999986806
+🔑 API Key: 345d7d7c...
+🔗 Endpoint: https://api.semaphore.co/api/v4/messages
+✅ Semaphore: SMS sent successfully! Message ID: 253313096, Status: Pending
+ POST /register 200 in 1291ms
+ GET /login 200 in 124ms
+ GET /login/SignIn_clerk_catchall_check_1755413899125 200 in 153ms
+ GET /login 200 in 41ms
+ ○ Compiling /login-phone ...
+ ✓ Compiled /login-phone in 833ms
+ GET /login-phone 200 in 866ms
+ ✓ Compiled /api/auth/phone-login in 201ms
+ ⨯ ./app/api/auth/phone-login/route.ts:6:1
+Module not found: Can't resolve '@/lib/utils/otp'
+[0m [90m 4 |[39m [36mimport[39m { eq[33m,[39m and[33m,[39m gte } [36mfrom[39m [32m'drizzle-orm'[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mSMSService[39m } [36mfrom[39m [32m'@/lib/sms/sms-service'[39m[0m
+[0m[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { generateOTP } [36mfrom[39m [32m'@/lib/utils/otp'[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { [33mSignJWT[39m } [36mfrom[39m [32m'jose'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { cookies } [36mfrom[39m [32m'next/headers'[39m[0m
+[0m [90m 9 |[39m[0m
+
+Import map: aliased to relative './lib/utils/otp' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/api/auth/phone-login/route.ts:7:1
+Module not found: Can't resolve 'jose'
+[0m [90m  5 |[39m [36mimport[39m { [33mSMSService[39m } [36mfrom[39m [32m'@/lib/sms/sms-service'[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { generateOTP } [36mfrom[39m [32m'@/lib/utils/otp'[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mSignJWT[39m } [36mfrom[39m [32m'jose'[39m[0m
+[0m [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m [36mimport[39m { cookies } [36mfrom[39m [32m'next/headers'[39m[0m
+[0m [90m  9 |[39m[0m
+[0m [90m 10 |[39m [36mexport[39m [36masync[39m [36mfunction[39m [33mPOST[39m(request[33m:[39m [33mNextRequest[39m) {[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/api/auth/phone-login/route.ts:3:1
+Export otpCodes doesn't exist in target module
+[0m [90m 1 |[39m [36mimport[39m { [33mNextRequest[39m[33m,[39m [33mNextResponse[39m } [36mfrom[39m [32m'next/server'[39m[0m
+[0m [90m 2 |[39m [36mimport[39m { db } [36mfrom[39m [32m'@/db'[39m[0m
+[0m[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { users[33m,[39m otpCodes } [36mfrom[39m [32m'@/db/schema'[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { eq[33m,[39m and[33m,[39m gte } [36mfrom[39m [32m'drizzle-orm'[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mSMSService[39m } [36mfrom[39m [32m'@/lib/sms/sms-service'[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { generateOTP } [36mfrom[39m [32m'@/lib/utils/otp'[39m[0m
+
+The export otpCodes was not found in module [project]/db/schema/index.ts [app-route] (ecmascript) <exports>.
+Did you mean to import customers?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+
+ ✓ Compiled /_error in 370ms
+ POST /api/auth/phone-login 500 in 692ms
+ GET /login-phone 200 in 77ms
+ GET /login-phone 200 in 112ms
+ GET /favicon.ico?favicon.5d0afc85.ico 500 in 23ms
+ GET /login-phone 200 in 75ms
+ GET /favicon.ico?favicon.5d0afc85.ico 500 in 21ms
+[?25h

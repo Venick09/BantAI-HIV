@@ -1,4 +1,5 @@
-import { getCustomerByUserId } from "@/actions/customers"
+import { getCustomerByUserId, createCustomer } from "@/actions/customers"
+import { ensureUserExists } from "@/actions/users"
 import { currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 import DashboardClientLayout from "./_components/layout-client"
@@ -14,13 +15,25 @@ export default async function DashboardLayout({
     redirect("/login")
   }
 
-  const customer = await getCustomerByUserId(user.id)
+  // Ensure user exists in our database
+  const dbUser = await ensureUserExists(user.id)
+  
+  if (!dbUser) {
+    // If we can't create a user, something is wrong
+    throw new Error("Failed to create user record")
+  }
 
-  // Gate dashboard access for pro members only
-  // Store a message to show why they were redirected
-  if (!customer || customer.membership !== "pro") {
-    // Using searchParams to pass a message that can be read by client components
-    redirect("/?redirect=dashboard#pricing")
+  let customer = await getCustomerByUserId(user.id)
+
+  // Create customer if doesn't exist
+  if (!customer) {
+    const result = await createCustomer(user.id)
+    if (result.isSuccess && result.data) {
+      customer = result.data
+    } else {
+      // If customer creation fails, show error
+      throw new Error("Failed to create customer record")
+    }
   }
 
   const userData = {
