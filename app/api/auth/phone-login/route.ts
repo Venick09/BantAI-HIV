@@ -6,13 +6,31 @@ import { SMSService } from '@/lib/sms/sms-service'
 import { OTPService } from '@/lib/sms/otp'
 import { SignJWT } from 'jose'
 import { cookies } from 'next/headers'
+import { withMiddleware, createApiResponse, createErrorResponse } from '@/lib/api-middleware'
+import { authRateLimiter, otpRateLimiter } from '@/lib/rate-limit'
+import { validateRequest, phoneLoginSchema } from '@/lib/validations'
 
 export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json()
-    const { phoneNumber, otp, action } = body
+  return withMiddleware(request, async (req) => {
+    // Validate request body
+    const validation = await validateRequest(req, phoneLoginSchema)
+    if (validation.error) {
+      return validation.error
+    }
+    
+    const { phoneNumber, action } = validation.data
+    const otp = 'otp' in validation.data ? validation.data.otp : undefined
 
     if (action === 'send-otp') {
+      // Apply OTP rate limiting
+      const otpCheck = await otpRateLimiter.checkLimit(req)
+      if (!otpCheck.allowed) {
+        const retryAfter = Math.ceil((otpCheck.resetTime - Date.now()) / 1000)
+        return createErrorResponse('Too many OTP requests. Please try again later.', 429, {
+          retryAfter,
+          resetTime: new Date(otpCheck.resetTime).toISOString()
+        })
+      }
       // Check if user exists
       const [user] = await db
         .select()
@@ -21,10 +39,7 @@ export async function POST(request: NextRequest) {
         .limit(1)
 
       if (!user) {
-        return NextResponse.json({
-          success: false,
-          error: 'Phone number not registered. Please register first.'
-        })
+        return createErrorResponse('Phone number not registered. Please register first.')
       }
 
       // Generate and store OTP
@@ -50,16 +65,15 @@ export async function POST(request: NextRequest) {
         phoneNumber,
         message,
         user.id,
-        'otp',
-        { type: 'otp' }
+        'otp'
       )
 
-      return NextResponse.json({
+      return createApiResponse({
         success: true,
         message: 'OTP sent successfully'
       })
 
-    } else if (action === 'verify-otp') {
+    } else if (action === 'verify-otp' && otp) {
       // Verify OTP
       const [validOTP] = await db
         .select()
@@ -76,10 +90,7 @@ export async function POST(request: NextRequest) {
         .limit(1)
 
       if (!validOTP) {
-        return NextResponse.json({
-          success: false,
-          error: 'Invalid or expired OTP'
-        })
+        return createErrorResponse('Invalid or expired OTP', 401)
       }
 
       // Mark OTP as verified
@@ -96,10 +107,7 @@ export async function POST(request: NextRequest) {
         .limit(1)
 
       if (!user) {
-        return NextResponse.json({
-          success: false,
-          error: 'User not found'
-        })
+        return createErrorResponse('User not found', 404)
       }
 
       // Update last login
@@ -109,10 +117,11 @@ export async function POST(request: NextRequest) {
         .where(eq(users.id, user.id))
 
       // Create a custom session token
-      // Note: In production, you should use proper session management
-      const secret = new TextEncoder().encode(
-        process.env.JWT_SECRET || 'your-secret-key'
-      )
+      if (!process.env.JWT_SECRET) {
+        throw new Error('JWT_SECRET environment variable is not configured')
+      }
+      
+      const secret = new TextEncoder().encode(process.env.JWT_SECRET)
       
       const token = await new SignJWT({ 
         userId: user.id,
@@ -134,7 +143,7 @@ export async function POST(request: NextRequest) {
         maxAge: 60 * 60 * 24 // 24 hours
       })
 
-      return NextResponse.json({
+      return createApiResponse({
         success: true,
         user: {
           id: user.id,
@@ -146,16 +155,8 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    return NextResponse.json({
-      success: false,
-      error: 'Invalid action'
-    })
-
-  } catch (error) {
-    console.error('Phone login error:', error)
-    return NextResponse.json({
-      success: false,
-      error: 'An error occurred during login'
-    })
-  }
+    return createErrorResponse('Invalid action')
+  }, {
+    rateLimiter: authRateLimiter
+  })
 }

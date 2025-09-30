@@ -40,7 +40,8 @@ export const users = pgTable("users", {
   registeredBy: uuid("registered_by"),
   testCenterId: uuid("test_center_id").references(() => testCenters.id),
   createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").defaultNow().notNull()
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  lastLoginAt: timestamp("last_login_at")
 })
 
 // OTP verifications table
@@ -50,6 +51,8 @@ export const otpVerifications = pgTable("otp_verifications", {
   otpCode: text("otp_code").notNull(),
   purpose: text("purpose").notNull(), // 'registration', 'login', 'password_reset'
   isUsed: boolean("is_used").default(false).notNull(),
+  verified: boolean("verified").default(false).notNull(),
+  verifiedAt: timestamp("verified_at"),
   expiresAt: timestamp("expires_at").notNull(),
   attempts: integer("attempts").default(0).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull()

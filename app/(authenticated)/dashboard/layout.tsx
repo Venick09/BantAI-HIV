@@ -1,8 +1,8 @@
 import { getCustomerByUserId, createCustomer } from "@/actions/customers"
-import { ensureUserExists } from "@/actions/users"
 import { currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 import DashboardClientLayout from "./_components/layout-client"
+import { syncClerkUser } from "@/lib/clerk-sync"
 
 export default async function DashboardLayout({
   children
@@ -15,8 +15,8 @@ export default async function DashboardLayout({
     redirect("/login")
   }
 
-  // Ensure user exists in our database
-  const dbUser = await ensureUserExists(user.id)
+  // Ensure user exists in our database using our sync function
+  const dbUser = await syncClerkUser()
   
   if (!dbUser) {
     // If we can't create a user, something is wrong

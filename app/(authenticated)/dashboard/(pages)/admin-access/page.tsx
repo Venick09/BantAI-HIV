@@ -1,15 +1,46 @@
+'use client'
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Shield, Lock, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
-import { isAdmin } from '@/middleware/admin'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import { useUser } from '@clerk/nextjs'
+import { useState } from 'react'
 
-export default async function AdminAccessPage() {
-  const admin = await isAdmin()
-  
-  if (admin) {
-    redirect('/admin')
+export default function AdminAccessPage() {
+  const router = useRouter()
+  const { user } = useUser()
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('')
+
+  const handlePromoteToAdmin = async () => {
+    setLoading(true)
+    setMessage('')
+
+    try {
+      const response = await fetch('/api/admin/promote', {
+        method: 'POST'
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setMessage(data.message)
+        if (data.role === 'admin') {
+          // Redirect to admin dashboard after 2 seconds
+          setTimeout(() => {
+            router.push('/admin')
+          }, 2000)
+        }
+      } else {
+        setMessage(data.message || 'Unable to grant admin access')
+      }
+    } catch (error) {
+      setMessage('An error occurred while checking admin access')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -54,7 +85,34 @@ export default async function AdminAccessPage() {
               </ul>
             </div>
 
+            {message && (
+              <div className={`p-4 rounded-md text-sm ${
+                message.includes('Successfully') 
+                  ? 'bg-green-50 text-green-800 border border-green-200' 
+                  : 'bg-amber-50 text-amber-800 border border-amber-200'
+              }`}>
+                {message}
+              </div>
+            )}
+
+            {user?.emailAddresses[0]?.emailAddress && (
+              <div className="bg-blue-50 rounded-lg p-4 space-y-2">
+                <p className="text-sm text-blue-900 font-medium">Current Email:</p>
+                <p className="text-sm text-blue-700">{user.emailAddresses[0].emailAddress}</p>
+              </div>
+            )}
+
             <div className="flex flex-col gap-3">
+              <Button 
+                onClick={handlePromoteToAdmin}
+                disabled={loading}
+                variant="outline"
+                className="w-full"
+                size="lg"
+              >
+                {loading ? 'Checking...' : 'Check Admin Eligibility'}
+              </Button>
+              
               <Button asChild className="w-full" size="lg">
                 <Link href="/dashboard">
                   Return to Dashboard

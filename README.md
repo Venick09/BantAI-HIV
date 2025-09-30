@@ -1,46 +1,195 @@
-# Vireo App Template
+# BantAI HIV Platform
 
-This is a full-stack app template that I use to build my own apps.
+A comprehensive SMS-based HIV management platform for the Philippines, enabling remote patient care, medication adherence monitoring, and health worker coordination.
 
-To learn how to use this template with the best AI tools & workflows, check out my workshops on [Takeoff](https://JoinTakeoff.com/)!
+## 🚀 Tech Stack
 
-## Tech Stack
+- **Frontend**: [Next.js 15](https://nextjs.org/), [React 19](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/), [Shadcn UI](https://ui.shadcn.com/)
+- **Backend**: [PostgreSQL](https://www.postgresql.org/), [Drizzle ORM](https://orm.drizzle.team/), [Next.js API Routes](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
+- **Authentication**: [Clerk](https://clerk.com/) + Custom Phone-based OTP
+- **SMS Integration**: [Semaphore](https://semaphore.co/) (Philippines SMS provider)
+- **Deployment**: [Vercel](https://vercel.com/) / Docker
 
-- Frontend: [Next.js](https://nextjs.org/docs), [Tailwind](https://tailwindcss.com/docs/guides/nextjs), [Shadcn](https://ui.shadcn.com/docs/installation), [Framer Motion](https://www.framer.com/motion/introduction/)
-- Backend: [PostgreSQL](https://www.postgresql.org/about/), [Supabase](https://supabase.com/), [Drizzle](https://orm.drizzle.team/docs/get-started-postgresql), [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
-- Auth: [Clerk](https://clerk.com/)
+## 🔒 Security Improvements Implemented
 
-## Prerequisites
+1. **Fixed OTP Schema Mismatch** - Added missing `verified` and `verifiedAt` fields
+2. **Removed Hardcoded JWT Secret** - Now uses environment variables
+3. **Added API Rate Limiting** - Protection against brute force attacks
+4. **Implemented Zod Validation** - Type-safe input validation across all endpoints
+5. **Added Database Indexes** - Improved query performance
+6. **Comprehensive Error Handling** - Consistent error responses
 
-You will need accounts for the following services.
+## 📋 Prerequisites
 
-They all have free plans that you can use to get started.
+- Node.js 20+
+- PostgreSQL 16+ or Supabase account
+- Clerk account for authentication
+- Semaphore account for SMS (Philippines)
 
-- Create a [GitHub](https://github.com/) account
-- Create a [Supabase](https://supabase.com/) account
-- Create a [Clerk](https://clerk.com/) account
-- Create a [Vercel](https://vercel.com/) account
+## 🛠️ Setup Instructions
 
-You will likely not need paid plans unless you are building a business.
-
-## Environment Variables
+### 1. Clone and Install
 
 ```bash
-# DB
-DATABASE_URL=
-# Access Supabase Studio here: http://127.0.0.1:54323/project/default
-
-# Clerk
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
-CLERK_SECRET_KEY=
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/login # do not change
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/signup # do not change
-
+git clone <repository>
+cd BantAI-HIV
+npm install
 ```
 
-## Setup
+### 2. Environment Setup
 
-1. Clone the repository
-2. Copy `.env.example` to `.env.local` and fill in the environment variables from above
-3. Run `npm install` to install dependencies
-4. Run `npm run dev` to run the app locally
+Copy `.env.example` to `.env.local` and configure:
+
+```bash
+# Database
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/bantai_hiv"
+
+# Clerk Authentication
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+CLERK_SECRET_KEY=sk_test_...
+
+# SMS Provider (Semaphore)
+SMS_PROVIDER=semaphore
+SEMAPHORE_API_KEY=your_api_key
+SEMAPHORE_SENDER_NAME=BantAI
+
+# Security Keys (Generate secure random strings)
+JWT_SECRET=<generate-secure-random-string>
+OTP_SECRET=<generate-secure-random-string>
+```
+
+### 3. Database Setup
+
+```bash
+# Run migrations
+npx drizzle-kit push
+
+# Apply additional migrations
+psql $DATABASE_URL < db/migrations/0003_fix_otp_schema.sql
+psql $DATABASE_URL < db/migrations/0004_add_indexes.sql
+
+# Seed database (optional)
+npx bun db/seed
+```
+
+### 4. Development
+
+```bash
+# Start development server
+npm run dev
+
+# Run type checking
+npm run types
+
+# Run linting
+npm run lint
+
+# Run tests
+npm run test
+```
+
+## 🐳 Docker Deployment
+
+### Development with Docker
+
+```bash
+# Start all services (PostgreSQL, Redis, MailHog)
+docker-compose -f docker-compose.dev.yml up -d
+
+# Build and run the app
+docker-compose up --build
+```
+
+### Production Deployment
+
+```bash
+# Build production image
+docker build -t bantai-hiv .
+
+# Run with docker-compose
+docker-compose up -d
+```
+
+## 📱 Key Features
+
+- **SMS-based Registration & Authentication**
+- **OTP Verification System**
+- **Patient Management Dashboard**
+- **Risk Assessment Tracking**
+- **ART (Antiretroviral Therapy) Management**
+- **Referral System**
+- **SMS Templates in English/Tagalog**
+- **Comprehensive Audit Logging**
+
+## 🔑 API Security
+
+All API endpoints include:
+- Rate limiting (configurable per endpoint)
+- Input validation with Zod schemas
+- JWT authentication for protected routes
+- Comprehensive error handling
+- Request/Response logging
+
+### Rate Limits
+
+- Authentication: 5 attempts per 15 minutes
+- OTP requests: 3 per hour
+- General API: 60 requests per minute
+
+## 📊 Database Schema
+
+Key tables:
+- `users` - User accounts with phone-based auth
+- `otpVerifications` - OTP tracking with expiry
+- `smsLogs` - Complete SMS history
+- `riskAssessments` - Patient risk evaluations
+- `artManagement` - Medication tracking
+- `referrals` - Patient referral system
+
+## 🧪 Testing
+
+```bash
+# Unit tests
+npm run test:unit
+
+# E2E tests
+npm run test:e2e
+
+# All tests
+npm run test
+```
+
+## 📝 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run types` - TypeScript type checking
+- `npm run format:write` - Format with Prettier
+- `npm run clean` - Lint fix + format
+- `npx drizzle-kit push` - Apply schema changes
+- `npx drizzle-kit generate` - Generate migrations
+
+## 🚨 Security Considerations
+
+1. **Environment Variables**: Never commit `.env.local`
+2. **API Keys**: Use different keys for development/production
+3. **Database**: Enable SSL in production
+4. **Rate Limiting**: Adjust limits based on usage patterns
+5. **Monitoring**: Set up error tracking (Sentry recommended)
+
+## 🤝 Contributing
+
+1. Create a feature branch
+2. Run tests and linting before committing
+3. Follow the existing code style
+4. Update documentation as needed
+
+## 📄 License
+
+This project is proprietary and confidential.
+
+---
+
+For issues or questions, please contact the development team.

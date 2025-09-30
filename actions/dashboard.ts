@@ -4,6 +4,7 @@ import { db } from '@/db'
 import { users, riskAssessments, testResults, referrals } from '@/db/schema'
 import { eq, desc, and } from 'drizzle-orm'
 import { auth } from '@clerk/nextjs/server'
+import { syncClerkUser } from '@/lib/clerk-sync'
 
 export async function getDashboardData() {
   try {
@@ -13,14 +14,18 @@ export async function getDashboardData() {
     }
 
     // Get user from database
-    const [user] = await db
+    let [user] = await db
       .select()
       .from(users)
       .where(eq(users.clerkId, userId))
       .limit(1)
 
+    // If user doesn't exist, sync from Clerk
     if (!user) {
-      return { success: false, error: 'User not found' }
+      user = await syncClerkUser()
+      if (!user) {
+        return { success: false, error: 'User not found' }
+      }
     }
 
     // Get latest risk assessment
@@ -93,7 +98,7 @@ export async function getDashboardData() {
           firstName: user.firstName,
           lastName: user.lastName,
           phoneNumber: user.phoneNumber,
-          verificationStatus: user.verificationStatus
+          verificationStatus: user.isVerified ? 'verified' : 'unverified'
         },
         assessment: {
           status: assessmentStatus,

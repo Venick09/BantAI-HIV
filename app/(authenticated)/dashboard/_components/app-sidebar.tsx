@@ -1,6 +1,6 @@
 "use client"
 
-import { Settings2, User, Users, Heart, Activity, Home } from "lucide-react"
+import { Settings2, User, Heart, Home, Shield, MapPin, FileText, Phone } from "lucide-react"
 import * as React from "react"
 
 import {
@@ -29,36 +29,21 @@ export function AppSidebar({
     user: userData,
     teams: [
       {
-        name: "Personal",
-        logo: User,
-        plan: "Account"
-      },
-      {
-        name: "Team 1",
-        logo: Users,
-        plan: "Team"
-      },
-      {
-        name: "Team 2",
-        logo: Users,
-        plan: "Team"
-      },
-      {
-        name: "Team 3",
-        logo: Users,
-        plan: "Team"
+        name: "BantAI HIV Platform",
+        logo: Shield,
+        plan: "Patient Portal"
       }
     ],
     navMain: [
       {
-        title: "Home",
+        title: "Dashboard",
         url: "/dashboard",
         icon: Home,
         isActive: true,
         items: []
       },
       {
-        title: "Health Services",
+        title: "My Health",
         url: "#",
         icon: Heart,
         items: [
@@ -67,36 +52,36 @@ export function AppSidebar({
             url: "/dashboard/risk-assessment"
           },
           {
-            title: "My Results",
+            title: "Test Results",
             url: "/dashboard/results"
           },
           {
-            title: "Test Centers",
-            url: "/dashboard/test-centers"
+            title: "My Appointments",
+            url: "/dashboard/appointments"
           }
         ]
       },
       {
-        title: "Treatment",
+        title: "Resources",
         url: "#",
-        icon: Activity,
+        icon: MapPin,
         items: [
           {
-            title: "ART Management",
-            url: "/dashboard/art"
+            title: "Find Test Centers",
+            url: "/dashboard/test-centers"
           },
           {
-            title: "Appointments",
-            url: "/dashboard/appointments"
+            title: "Educational Materials",
+            url: "/dashboard/resources"
           },
           {
-            title: "Reminders",
-            url: "/dashboard/reminders"
+            title: "Emergency Contacts",
+            url: "/dashboard/emergency-contacts"
           }
         ]
       },
       {
-        title: "Account",
+        title: "My Account",
         url: "#",
         icon: User,
         items: [
@@ -105,31 +90,27 @@ export function AppSidebar({
             url: "/dashboard/account"
           },
           {
-            title: "Billing",
-            url: "/dashboard/billing"
-          },
-          {
-            title: "Support",
-            url: "/dashboard/support"
-          }
-        ]
-      },
-      {
-        title: "Settings",
-        url: "#",
-        icon: Settings2,
-        items: [
-          {
-            title: "General",
-            url: "/dashboard/settings"
-          },
-          {
-            title: "Privacy",
+            title: "Privacy Settings",
             url: "/dashboard/privacy"
           },
           {
             title: "Consent Management",
             url: "/dashboard/consent"
+          }
+        ]
+      },
+      {
+        title: "Support",
+        url: "#",
+        icon: Phone,
+        items: [
+          {
+            title: "Contact Support",
+            url: "/dashboard/support"
+          },
+          {
+            title: "FAQ",
+            url: "/dashboard/faq"
           }
         ]
       }

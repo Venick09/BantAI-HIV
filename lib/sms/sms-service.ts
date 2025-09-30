@@ -6,7 +6,7 @@ import type { SMSProvider, SMSResult, SendSMSOptions } from './types'
 
 export class SMSService {
   private provider: SMSProvider | null = null
-  private providerName: 'semaphore' = 'semaphore'
+  private providerName = 'semaphore' as const
   
   async initialize() {
     try {
@@ -22,7 +22,7 @@ export class SMSService {
         this.initializeFromEnv()
       } else {
         const providerConfig = config[0]
-        this.providerName = providerConfig.provider as 'twilio' | 'semaphore' | 'console'
+        this.providerName = 'semaphore' // Only support Semaphore
         
         // Only support Semaphore
         if (providerConfig.provider === 'semaphore') {
